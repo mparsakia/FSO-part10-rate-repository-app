@@ -1,22 +1,103 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 
-const RepositoryItem = (props) => (
-  <Text>
-    Full Name: {props.fullName}
-    <br />
-    Desc: {props.description}
-    <br />
-    Lang: {props.language}
-    <br />
-    Stars: {props.stargazersCount}
-    <br />
-    Forks: {props.forksCount}
-    <br />
-    Reviews: {props.reviewCount}
-    <br />
-    Rating: {props.ratingAverage}
-  </Text>
-);
+import Text from './Text';
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    marginBottom: 5,
+    backgroundColor: 'white',
+  },
+  image: {
+    width: 64,
+    height: 64,
+  },
+  flexRow: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  imagePad: {
+    paddingHorizontal: 10,
+  },
+  repoHeadTxt: {
+    paddingBottom: 5,
+  },
+  repoInfo: {
+    justifyContent: 'space-evenly',
+    paddingTop: 5,
+  },
+  tag: {
+    backgroundColor: 'linen',
+    color: 'black',
+    padding: 5,
+    marginVertical: 5,
+    borderRadius: 5,
+    alignSelf: 'flex-start',
+  },
+  repoStatsTxt: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+});
+
+const RepositoryItem = (props) => {
+  function countFormatter(num) {
+    let count = 0;
+    if (num >= 1000) {
+      count = `${Math.round((num / 1000) * 10) / 10}k`;
+    } else {
+      count = num.toString();
+    }
+    return count;
+  }
+
+  const stargazersFormatted = countFormatter(props.stargazersCount);
+  const forksCountFormatted = countFormatter(props.forksCount);
+  const reviewCountFormatted = countFormatter(props.reviewCount);
+  const ratingAverageFormatted = countFormatter(props.ratingAverage);
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.flexRow}>
+        <Image style={styles.image} source={{ uri: props.ownerAvatarUrl }} />
+        <View style={styles.imagePad}>
+          <Text
+            fontWeight="bold"
+            fontSize="subheading"
+            style={styles.repoHeadTxt}>
+            {props.fullName}
+          </Text>
+          <Text color="textSecondary" style={styles.repoHeadTxt}>
+            {props.description}
+          </Text>
+          <Text style={styles.tag}>{props.language}</Text>
+        </View>
+      </View>
+      <View style={[styles.flexRow, styles.repoInfo]}>
+        <Text style={styles.repoStatsTxt}>
+          {stargazersFormatted}
+          {'\n'}
+          {'Stars'}
+        </Text>
+        <Text style={styles.repoStatsTxt}>
+          {forksCountFormatted}
+          {'\n'}
+          {'Forks'}
+        </Text>
+        <Text style={styles.repoStatsTxt}>
+          {reviewCountFormatted}
+          {'\n'}
+          {'Reviews'}
+        </Text>
+        <Text style={styles.repoStatsTxt}>
+          {ratingAverageFormatted}
+          {'\n'}
+          {'Rating'}
+        </Text>
+      </View>
+    </View>
+  );
+};
 
 export default RepositoryItem;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
+
 import Constants from 'expo-constants';
 import AppBarTab from './AppBarTab';
 
@@ -21,7 +22,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scroll}>
         <AppBarTab title="Repos" link={'/'} />
-        <AppBarTab title="Sign In" link={'/'} />
+        <AppBarTab title="Sign In" link={'/signin'} />
       </ScrollView>
     </View>
   );

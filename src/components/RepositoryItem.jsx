@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   flexRow: {
     display: 'flex',
     flexDirection: 'row',
+    // flexWrap: 'wrap',
   },
   imagePad: {
     paddingHorizontal: 10,
@@ -28,8 +29,8 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
   tag: {
-    backgroundColor: 'linen',
-    color: 'black',
+    backgroundColor: 'midnightblue',
+    color: 'white',
     padding: 5,
     marginVertical: 5,
     borderRadius: 5,
@@ -68,9 +69,7 @@ const RepositoryItem = (props) => {
             style={styles.repoHeadTxt}>
             {props.fullName}
           </Text>
-          <Text color="textSecondary" style={styles.repoHeadTxt}>
-            {props.description}
-          </Text>
+          <Text style={styles.repoHeadTxt}>{props.description}</Text>
           <Text style={styles.tag}>{props.language}</Text>
         </View>
       </View>

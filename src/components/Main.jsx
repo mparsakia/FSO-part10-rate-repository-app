@@ -6,6 +6,7 @@ import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import theme from '../theme';
 import SignIn from './SignIn';
+import WhatIsMyPlatform from './WhatIsMyPlatform';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +20,7 @@ const Main = () => {
   return (
     <View style={styles.container}>
       <AppBar />
+      <WhatIsMyPlatform />
 
       <Switch>
         <Route path="/signin">

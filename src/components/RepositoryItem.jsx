@@ -59,7 +59,7 @@ const RepositoryItem = (props) => {
   const ratingAverageFormatted = countFormatter(props.ratingAverage);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} key={props.ownerAvatarUrl}>
       <View style={styles.flexRow}>
         <Image style={styles.image} source={{ uri: props.ownerAvatarUrl }} />
         <View style={styles.imagePad}>

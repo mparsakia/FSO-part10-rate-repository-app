@@ -1,9 +1,10 @@
 import ApolloClient from 'apollo-boost';
+import Constants from 'expo-constants';
 
 const createApolloClient = () => {
   return new ApolloClient({
-    // Replace the IP address part with your own IP address!
-    uri: 'http://192.168.50.209:5000/graphql',
+    // configure in dotenv file as APOLLO_URI
+    uri: Constants.manifest.extra.apolloUri,
   });
 };
 

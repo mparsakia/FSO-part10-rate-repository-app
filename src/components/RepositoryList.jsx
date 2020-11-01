@@ -18,7 +18,6 @@ const RepositoryList = () => {
     ? repositories.edges.map((edge) => edge.node)
     : [];
 
-  console.log(repositories);
   console.log(repositoryNodes);
 
   return (
@@ -27,7 +26,7 @@ const RepositoryList = () => {
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({ item }) => (
         <RepositoryItem
-          key={item.id}
+          key={item.ownerAvatarUrl}
           fullName={item.fullName}
           description={item.description}
           language={item.language}

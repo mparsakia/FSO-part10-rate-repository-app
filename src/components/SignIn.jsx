@@ -68,6 +68,10 @@ const SignIn = () => {
     try {
       const response = await signIn({ username, password });
       console.log('response log from SignIn.jsx', response);
+      console.log(
+        'accesstoken response from SignIn.jsx:',
+        response.data.authorize.accessToken
+      );
     } catch (e) {
       console.log(e);
     }

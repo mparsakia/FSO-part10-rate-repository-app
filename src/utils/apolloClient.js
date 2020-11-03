@@ -1,9 +1,21 @@
 import ApolloClient from 'apollo-boost';
 import Constants from 'expo-constants';
 
-const createApolloClient = () => {
+const createApolloClient = (authStorage) => {
   return new ApolloClient({
-    // configure in dotenv file as APOLLO_URI
+    request: async (operation) => {
+      try {
+        const accessToken = await authStorage.getAccessToken();
+        operation.setContext({
+          headers: {
+            authorization: accessToken ? `Bearer ${accessToken}` : '',
+          },
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    // config this uri in the dotenv file
     uri: Constants.manifest.extra.apolloUri,
   });
 };

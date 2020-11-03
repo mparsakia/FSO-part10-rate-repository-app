@@ -16,9 +16,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBarTab = ({ title, link }) => (
+const AppBarTab = ({ title, link, onPress }) => (
   <TouchableWithoutFeedback>
-    <Link to={link} component={TouchableOpacity} activeOpacity={0.3}>
+    <Link
+      to={link}
+      component={TouchableOpacity}
+      onPress={onPress}
+      activeOpacity={0.3}>
       <Text style={styles.appTabItem}>{title}</Text>
     </Link>
   </TouchableWithoutFeedback>

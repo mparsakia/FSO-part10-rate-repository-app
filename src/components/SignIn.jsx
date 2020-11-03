@@ -5,6 +5,7 @@ import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import Text from './Text';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
+import { useHistory } from 'react-router-native';
 
 const styles = StyleSheet.create({
   form: {
@@ -58,6 +59,7 @@ const initialValues = {
 };
 
 const SignIn = () => {
+  const history = useHistory();
   const [signIn] = useSignIn();
 
   const onSubmit = async (values) => {
@@ -72,6 +74,7 @@ const SignIn = () => {
         'accesstoken response from SignIn.jsx:',
         response.data.authorize.accessToken
       );
+      history.push('/'); // take user to homepage after successful sign in
     } catch (e) {
       console.log(e);
     }

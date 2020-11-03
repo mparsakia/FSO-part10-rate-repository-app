@@ -18,7 +18,7 @@ const RepositoryList = () => {
     ? repositories.edges.map((edge) => edge.node)
     : [];
 
-  console.log(repositoryNodes);
+  // console.log(repositoryNodes);
 
   return (
     <FlatList

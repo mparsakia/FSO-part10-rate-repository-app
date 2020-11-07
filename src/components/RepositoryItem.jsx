@@ -59,37 +59,42 @@ const RepositoryItem = (props) => {
   const ratingAverageFormatted = countFormatter(props.ratingAverage);
 
   return (
-    <View style={styles.container} key={props.ownerAvatarUrl}>
+    <View style={styles.container} key={props.id}>
       <View style={styles.flexRow}>
         <Image style={styles.image} source={{ uri: props.ownerAvatarUrl }} />
         <View style={styles.imagePad}>
           <Text
+            testID="fullName"
             fontWeight="bold"
             fontSize="subheading"
             style={styles.repoHeadTxt}>
             {props.fullName}
           </Text>
-          <Text style={styles.repoHeadTxt}>{props.description}</Text>
-          <Text style={styles.tag}>{props.language}</Text>
+          <Text testID="description" style={styles.repoHeadTxt}>
+            {props.description}
+          </Text>
+          <Text testID="language" style={styles.tag}>
+            {props.language}
+          </Text>
         </View>
       </View>
       <View style={[styles.flexRow, styles.repoInfo]}>
-        <Text style={styles.repoStatsTxt}>
+        <Text testID="Stars" style={styles.repoStatsTxt}>
           {stargazersFormatted}
           {'\n'}
           {'Stars'}
         </Text>
-        <Text style={styles.repoStatsTxt}>
+        <Text testID="Forks" style={styles.repoStatsTxt}>
           {forksCountFormatted}
           {'\n'}
           {'Forks'}
         </Text>
-        <Text style={styles.repoStatsTxt}>
+        <Text testID="Reviews" style={styles.repoStatsTxt}>
           {reviewCountFormatted}
           {'\n'}
           {'Reviews'}
         </Text>
-        <Text style={styles.repoStatsTxt}>
+        <Text testID="Rating" style={styles.repoStatsTxt}>
           {ratingAverageFormatted}
           {'\n'}
           {'Rating'}

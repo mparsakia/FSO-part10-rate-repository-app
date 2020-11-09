@@ -1,7 +1,15 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
+import { Link } from 'react-router-native';
 
 import Text from './Text';
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,8 +37,8 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
   tag: {
-    backgroundColor: 'midnightblue',
-    color: 'white',
+    backgroundColor: 'gold',
+    color: 'black',
     padding: 5,
     marginVertical: 5,
     borderRadius: 5,
@@ -40,6 +48,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
   },
+  button: {
+    backgroundColor: 'wheat',
+    padding: 10,
+    marginVertical: 20,
+  },
 });
 
 const RepositoryItem = (props) => {
@@ -47,10 +60,10 @@ const RepositoryItem = (props) => {
     let count = 0;
     if (num >= 1000) {
       count = `${Math.round((num / 1000) * 10) / 10}k`;
+      return count;
     } else {
-      count = num.toString();
+      return num;
     }
-    return count;
   }
 
   const stargazersFormatted = countFormatter(props.stargazersCount);
@@ -58,49 +71,66 @@ const RepositoryItem = (props) => {
   const reviewCountFormatted = countFormatter(props.reviewCount);
   const ratingAverageFormatted = countFormatter(props.ratingAverage);
 
+  // console.log('REPOITEM PROPS', props);
+
   return (
-    <View style={styles.container} key={props.id}>
-      <View style={styles.flexRow}>
-        <Image style={styles.image} source={{ uri: props.ownerAvatarUrl }} />
-        <View style={styles.imagePad}>
-          <Text
-            testID="fullName"
-            fontWeight="bold"
-            fontSize="subheading"
-            style={styles.repoHeadTxt}>
-            {props.fullName}
+    <Link
+      to={`/repository/${props.id}`}
+      component={TouchableOpacity}
+      key={props.id}>
+      <View style={styles.container} key={props.id}>
+        <View style={styles.flexRow}>
+          <Image style={styles.image} source={{ uri: props.ownerAvatarUrl }} />
+          <View style={styles.imagePad}>
+            <Text
+              testID="fullName"
+              fontWeight="bold"
+              fontSize="subheading"
+              style={styles.repoHeadTxt}>
+              {props.fullName}
+            </Text>
+            <Text testID="description" style={styles.repoHeadTxt}>
+              {props.description}
+            </Text>
+            <Text testID="language" style={styles.tag}>
+              {props.language}
+            </Text>
+          </View>
+        </View>
+        <View style={[styles.flexRow, styles.repoInfo]}>
+          <Text testID="Stars" style={styles.repoStatsTxt}>
+            {stargazersFormatted}
+            {'\n'}
+            {'Stars'}
           </Text>
-          <Text testID="description" style={styles.repoHeadTxt}>
-            {props.description}
+          <Text testID="Forks" style={styles.repoStatsTxt}>
+            {forksCountFormatted}
+            {'\n'}
+            {'Forks'}
           </Text>
-          <Text testID="language" style={styles.tag}>
-            {props.language}
+          <Text testID="Reviews" style={styles.repoStatsTxt}>
+            {reviewCountFormatted}
+            {'\n'}
+            {'Reviews'}
+          </Text>
+          <Text testID="Rating" style={styles.repoStatsTxt}>
+            {ratingAverageFormatted}
+            {'\n'}
+            {'Rating'}
           </Text>
         </View>
+        {props.url ? (
+          <View style={styles.button}>
+            <Button
+              testID="openGithub"
+              title="view on github"
+              onPress={() => {
+                Linking.openURL(props.url);
+              }}></Button>
+          </View>
+        ) : null}
       </View>
-      <View style={[styles.flexRow, styles.repoInfo]}>
-        <Text testID="Stars" style={styles.repoStatsTxt}>
-          {stargazersFormatted}
-          {'\n'}
-          {'Stars'}
-        </Text>
-        <Text testID="Forks" style={styles.repoStatsTxt}>
-          {forksCountFormatted}
-          {'\n'}
-          {'Forks'}
-        </Text>
-        <Text testID="Reviews" style={styles.repoStatsTxt}>
-          {reviewCountFormatted}
-          {'\n'}
-          {'Reviews'}
-        </Text>
-        <Text testID="Rating" style={styles.repoStatsTxt}>
-          {ratingAverageFormatted}
-          {'\n'}
-          {'Rating'}
-        </Text>
-      </View>
-    </View>
+    </Link>
   );
 };
 

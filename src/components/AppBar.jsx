@@ -11,7 +11,7 @@ import AuthStorageContext from '../contexts/AuthStorageContext';
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: 'aquamarine',
+    backgroundColor: 'papayawhip',
     display: 'flex',
   },
   scroll: {

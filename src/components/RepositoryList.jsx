@@ -19,6 +19,7 @@ export const RepositoryListContainer = ({ repositories }) => {
   const renderItem = ({ item }) => (
     <RepositoryItem
       key={item.id}
+      id={item.id}
       fullName={item.fullName}
       description={item.description}
       language={item.language}
@@ -42,6 +43,7 @@ export const RepositoryListContainer = ({ repositories }) => {
 
 const RepositoryList = () => {
   const { repositories } = useRepositories();
+  // console.log('RepositoryList.jsx log', repositories);
   return <RepositoryListContainer repositories={repositories} />;
 };
 export default RepositoryList;

@@ -1,19 +1,57 @@
 import { useQuery } from '@apollo/react-hooks';
 import { GET_REPOSITORIES } from '../graphql/queries';
 
-const useRepositories = () => {
-  //https://www.apollographql.com/docs/react/api/react/hooks/#usequery
-  const { loading, refetch, data } = useQuery(GET_REPOSITORIES, {
-    fetchPolicy: 'cache-and-network',
-  });
+const useRepositories = (sortList) => {
+  let variables;
 
-  let rtnobj = {
-    repositories: data ? data.repositories : null,
-    loading,
-    refetch,
-  };
-
-  return rtnobj;
+  if (sortList) {
+    switch (sortList) {
+      case 'DESC':
+        variables = {
+          orderBy: 'RATING_AVERAGE',
+          orderDirection: 'DESC',
+        };
+        break;
+      case 'ASC':
+        variables = {
+          orderBy: 'RATING_AVERAGE',
+          orderDirection: 'ASC',
+        };
+        break;
+      case 'DEFAULT':
+        variables = {
+          orderBy: 'CREATED_AT',
+          orderDirection: 'DESC',
+        };
+      default:
+        variables = {
+          orderBy: 'CREATED_AT',
+          orderDirection: 'DESC',
+        };
+        break;
+    }
+    const { loading, refetch, data } = useQuery(GET_REPOSITORIES, {
+      fetchPolicy: 'cache-and-network',
+      variables,
+    });
+    let rtnobj = {
+      repositories: data ? data.repositories : null,
+      loading,
+      refetch,
+    };
+    return rtnobj;
+  } else {
+    // i.e. when the app first loads / someone doesn't interact with the dropdown menu
+    const { loading, refetch, data } = useQuery(GET_REPOSITORIES, {
+      fetchPolicy: 'cache-and-network',
+    });
+    let rtnobj = {
+      repositories: data ? data.repositories : null,
+      loading,
+      refetch,
+    };
+    return rtnobj;
+  }
 };
 
 export default useRepositories;

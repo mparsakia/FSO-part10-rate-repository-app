@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'linen',
     padding: 15,
     margin: 15,
+    borderBottomColor: 'black',
+    borderBottomWidth: 2,
+    marginBottom: 30,
   },
   submitbtn: {
     margin: 15,
@@ -20,6 +23,7 @@ const styles = StyleSheet.create({
     padding: 15,
     fontSize: 22,
     borderRadius: 5,
+    textAlign: 'center',
   },
 });
 
@@ -63,8 +67,8 @@ const SignIn = () => {
   const [signIn] = useSignIn();
 
   const onSubmit = async (values) => {
-    console.log('user: ', values.username);
-    console.log('pass: ', values.password);
+    // console.log('user: ', values.username);
+    // console.log('pass: ', values.password);
     const { username, password } = values;
 
     try {

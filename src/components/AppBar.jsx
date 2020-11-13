@@ -37,23 +37,33 @@ const AppBar = () => {
     console.log('signOut was executed!');
   };
 
-  let logInOrOutButton;
+  let authedUserMenu;
   if (user) {
-    logInOrOutButton = (
-      <AppBarTab title="Sign Out" link={'/'} onPress={signOut} />
+    authedUserMenu = (
+      <>
+        <AppBarTab title="Create Review" link="/createreview" />
+        <AppBarTab title="Sign Out" link={'/'} onPress={signOut} />
+      </>
     );
   } else {
-    logInOrOutButton = <AppBarTab title="Sign In" link={'/signin'} />;
+    authedUserMenu = (
+      <>
+        <AppBarTab title="Sign In" link={'/signin'} />
+        <AppBarTab title="Sign Up" link={'/signup'} />
+      </>
+    );
   }
 
   return (
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scroll}>
         <AppBarTab title="Repos" link={'/'} />
-        {logInOrOutButton}
+        {authedUserMenu}
       </ScrollView>
     </View>
   );
 };
 
 export default AppBar;
+
+//

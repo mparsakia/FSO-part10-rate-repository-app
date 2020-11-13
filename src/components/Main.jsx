@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 // SafeAreaView can be wrapped at the highest level to ensure the app view
 // isnt covered by phone notches, rounded corners, etc...
 import { Route, Switch, Redirect } from 'react-router-native';
@@ -9,6 +9,8 @@ import AppBar from './AppBar';
 import theme from '../theme';
 import SignIn from './SignIn';
 import SingleRepo from './SingleRepo';
+import CreateReview from './CreateReview';
+import SignUp from './SignUp';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,6 +36,14 @@ const Main = () => {
 
         <Route path="/repository/:id" exact>
           <SingleRepo />
+        </Route>
+
+        <Route path="/createreview" exact>
+          <CreateReview />
+        </Route>
+
+        <Route path="/signup" exact>
+          <SignUp />
         </Route>
 
         <Redirect to="/" />

@@ -28,15 +28,15 @@ const styles = StyleSheet.create({
   circleRating: {
     height,
     width,
-    borderRadius: '50%',
+    borderRadius: width / 2,
     borderWidth: 2,
     borderStyle: 'solid',
     borderColor: 'blue',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '25px',
-    fontSize: '20px',
+    padding: 10,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   flexShrink: {
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
   },
   userAndDate: {
     fontSize: 16,
-    marginTop: '10px',
-    marginLeft: '10px',
+    marginTop: 10,
+    marginLeft: 10,
   },
   reviewsHeader: {
     fontSize: 32,
@@ -75,7 +75,8 @@ const SingleRepo = () => {
         <View style={styles.reviewContainer}>
           <Text style={styles.circleRating}>{item.node.rating}</Text>
           <Text style={styles.userAndDate}>
-            {item.node.user.username} <br></br>
+            {item.node.user.username}
+            {'\n'}
             {format(parseISO(item.node.createdAt), 'dd.MM.yyyy')}
           </Text>
         </View>

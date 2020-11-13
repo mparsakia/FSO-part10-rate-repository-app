@@ -1,7 +1,9 @@
 import { useQuery } from '@apollo/react-hooks';
 import { GET_REPOSITORIES } from '../graphql/queries';
 
-const useRepositories = (sortList) => {
+const useRepositories = (sortList, searchWord) => {
+  console.log('clog from useRepositories props:', sortList, searchWord);
+
   let variables;
 
   if (sortList) {
@@ -30,25 +32,38 @@ const useRepositories = (sortList) => {
         };
         break;
     }
-    const { loading, refetch, data } = useQuery(GET_REPOSITORIES, {
+
+    variables.searchKeyword = searchWord;
+
+    const { loading, refetch, data, ...result } = useQuery(GET_REPOSITORIES, {
       fetchPolicy: 'cache-and-network',
       variables,
     });
+    console.log('clog from useRepositories result', result);
+
     let rtnobj = {
       repositories: data ? data.repositories : null,
       loading,
       refetch,
+      ...result,
     };
     return rtnobj;
   } else {
     // i.e. when the app first loads / someone doesn't interact with the dropdown menu
-    const { loading, refetch, data } = useQuery(GET_REPOSITORIES, {
+    const { loading, refetch, data, ...result } = useQuery(GET_REPOSITORIES, {
       fetchPolicy: 'cache-and-network',
+      variables: {
+        searchKeyword: searchWord,
+      },
     });
+
+    console.log('clog from useRepositories result', result);
+
     let rtnobj = {
       repositories: data ? data.repositories : null,
       loading,
       refetch,
+      ...result,
     };
     return rtnobj;
   }
